@@ -15,11 +15,10 @@ with socket.socket(socket.AF_INET,socket.SOCK_STREAM) as sock_service:
                 'operazione' : operazione,
                 'secondoNumero' : secondoNumero}
     messaggio = json.dumps(messaggio)
-    sock_service.sendto(messaggio.encode("UTF-8"),(SERVER_IP,SERVER_PORT))
+    sock_service.sendall(messaggio.encode("UTF-8"))
     data = sock_service.recv(BUFFER_SIZE)
     print("Risultato: ", data.decode())
     continuo = input("Vuoi fare altre operazioni? sì=s no=n ")
     if(continuo == "n"):
         break
 
-print('Received', data.decode())
